@@ -40,6 +40,7 @@ function pullButoonsMoveXY () {
         yPosLStepDown()
     }
     led.plot(x_pos, y_pos)
+    basic.pause(100)
 }
 function yPosLStepUp () {
     led.unplot(x_pos, y_pos)
