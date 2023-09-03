@@ -16,6 +16,7 @@ function pullButtonsShowIcons () {
             `)
         basic.pause(BTN_PAUSE)
         basic.clearScreen()
+        radio.sendString("LEFT")
     } else if (pins.digitalReadPin(DigitalPin.P14) == 0) {
         basic.showLeds(`
             . . # . .
@@ -26,6 +27,7 @@ function pullButtonsShowIcons () {
             `)
         basic.pause(BTN_PAUSE)
         basic.clearScreen()
+        radio.sendString("UP")
     } else if (pins.digitalReadPin(DigitalPin.P15) == 0) {
         basic.showLeds(`
             . . . . .
@@ -36,6 +38,7 @@ function pullButtonsShowIcons () {
             `)
         basic.pause(BTN_PAUSE)
         basic.clearScreen()
+        radio.sendString("RIGHT")
     } else if (pins.digitalReadPin(DigitalPin.P16) == 0) {
         basic.showLeds(`
             . . . . .
@@ -46,6 +49,7 @@ function pullButtonsShowIcons () {
             `)
         basic.pause(BTN_PAUSE)
         basic.clearScreen()
+        radio.sendString("DOWN")
     }
 }
 let BTN_PAUSE = 0
@@ -61,7 +65,11 @@ pins.setPull(DigitalPin.P14, PinPullMode.PullUp)
 pins.setPull(DigitalPin.P15, PinPullMode.PullUp)
 pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
 BTN_PAUSE = 200
+radio.setGroup(5)
 basic.forever(function () {
     joystickMovingPoint()
     pullButtonsShowIcons()
+    basic.pause(100)
+    radio.sendValue("x_pos", x_pos)
+    radio.sendValue("y_pos", y_pos)
 })
